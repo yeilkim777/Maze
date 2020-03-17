@@ -43,9 +43,6 @@ public class Maze extends JFrame{
 				if(key == KeyEvent.VK_A){
 					p.moveLeft();
 				}
-				if(key == KeyEvent.VK_LEFT){
-					p.moveLeft();
-				}
 				if(key == KeyEvent.VK_S){
 					p.moveDown();
 				}
