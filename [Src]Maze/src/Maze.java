@@ -36,6 +36,7 @@ public class Maze extends JFrame{
 				repaint();
 				
 				//Player movement
+				//WASD
 				if(key == KeyEvent.VK_W){
 					p.moveUp();
 				}
