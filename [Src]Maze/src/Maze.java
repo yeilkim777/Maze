@@ -20,7 +20,7 @@ public class Maze extends JFrame implements Runnable{
     Player p;
     
     private boolean running;
-    public boolean right = false, left= false, up = false, down = false;
+    public boolean right = false, left= false, up = false, down = false, actionDone = false;
     public int ticks;
     public Thread thread;
     
@@ -41,58 +41,38 @@ public class Maze extends JFrame implements Runnable{
 				revalidate();
 				repaint();
 				
+				System.out.println("Does it loop here");
 				//Player movement
-				//WASD
-				if(/*key == KeyEvent.VK_W ||*/ key == KeyEvent.VK_UP && !down){
-					//p.moveUp();
-					
-					left = false;
-		            right = false;
-		            up = true;    
+				if((key == KeyEvent.VK_W || key == KeyEvent.VK_UP) && !down && !left && !right){
+						left = false;
+						right = false;
+						up = true; 
 				}
 				
-				if(/*key == KeyEvent.VK_A ||*/ key == KeyEvent.VK_LEFT && !right){
-					//p.moveLeft();
-					
-					up = false;
-		            down = false;
-		            left = true;
+				if((key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) && !right && !up && !down){					
+						up = false;
+						down = false;
+						left = true;
 				}
-				if(/*key == KeyEvent.VK_S ||*/ key == KeyEvent.VK_DOWN && !up){
-					//p.moveDown();
+				if((key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) && !up && !left && !right){
 					
-					left = false;
-		            right = false;
-		            down = true;
+						left = false;
+						right = false;
+						down = true;
 				}
-				if(/*key == KeyEvent.VK_D ||*/ key == KeyEvent.VK_RIGHT && !left){
-					//p.moveRight();
+				if((key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) && !left && !up && !down){
 					
-					up = false;
-			        down = false;
-			        right = true;
+						up = false;
+						down = false;
+						right = true;
 				}
 				
 				
-				//Direction pad
-//				if (key == KeyEvent.VK_UP) {
-//					p.moveUp();
+//				if(p.x == columns-1 && p.y == endLevelLoc){
+//					JOptionPane.showMessageDialog(null, "Congratulations, you've beaten the level!", "End Game", JOptionPane.INFORMATION_MESSAGE);
+//					dispose();
+//					new MainMenu();
 //				}
-//				if(key == KeyEvent.VK_LEFT){
-//					p.moveLeft();
-//				}
-//				if(key == KeyEvent.VK_DOWN){
-//					p.moveDown();
-//				}
-//				if(key == KeyEvent.VK_RIGHT){
-//					p.moveRight();
-//				}
-				
-				if(p.x == columns-1 && p.y == endLevelLoc){
-					JOptionPane.showMessageDialog(null, "Congratulations, you've beaten the level!", "End Game", JOptionPane.INFORMATION_MESSAGE);
-					dispose();
-					new MainMenu();
-				}
 			}
 
 			@Override
@@ -212,26 +192,36 @@ public class Maze extends JFrame implements Runnable{
 		ticks++;
 		if (ticks > 250000) {
 			if (right) p.moveRight(); {
-				if (map[p.x+1][p.y] == 0 || map[p.x+1][p.y] == -1) {
-					right=false;
+				//System.out.println(endLevelLoc);
+				if (p.x == columns-1 && p.y == endLevelLoc) {
+					right = true;
+					//possibly redundant after implementing maze coloring
+				} else if (map[p.x+1][p.y] == 0) {
+					right = false;
 				} 
 			}
 			if (left) p.moveLeft();{
 				if (p.x == 0) {
 					left = false;
 				} else if (map[p.x-1][p.y] == 0 || map[p.x-1][p.y] == -1) {
-					left=false;
+					left = false;
 				} 
 			}	
 			if (up) p.moveUp(); {
 				if (map[p.x][p.y-1] == 0) {
-					up=false;
+					up = false;
 				} 
 			}
 			if (down) p.moveDown(); {
 				if (map[p.x][p.y+1] == 0) {
-					down=false;
+					down = false;
 				} 
+			}
+			if(p.x == columns-1 && p.y == endLevelLoc){
+				stop();
+				JOptionPane.showMessageDialog(null, "Congratulations, you've beaten the level!", "End Game", JOptionPane.INFORMATION_MESSAGE);
+				dispose();
+				new MainMenu();
 			}
 			ticks = 0;
 		}
