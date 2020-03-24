@@ -93,7 +93,7 @@ public class MainMenu {
         imageLabel.setVisible(true);
         Menu.add(imageLabel);
         Menu.setVisible(true);
-    }
+    } 
 
     static boolean levelsExistAlready = false;
 

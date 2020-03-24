@@ -7,7 +7,7 @@ public class Tile extends JPanel{
     
     public Tile(int x, int y){
         this.x = x;
-        this.y = y;
+        this.y = y; 
     }
     
     public void setWall(boolean isWall){

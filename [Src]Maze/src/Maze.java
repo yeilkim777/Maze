@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Maze extends JFrame{
+public class Maze extends JFrame implements Runnable{
     public static int rows = 20;
     public static int columns = 20;
     public static int panelSize = 35;
@@ -19,12 +19,18 @@ public class Maze extends JFrame{
     public static int endLevelLoc;
     Player p;
     
+    private boolean running;
+    public boolean right = false, left= false, up = false, down = false;
+    public int ticks;
+    public Thread thread;
+    
     public Maze(String str){
-        loadMap(str);
+        
+    	loadMap(str);
         this.setResizable(false);
         this.setSize((columns*panelSize)+50, (rows*panelSize)+70);
         this.setTitle("Maze");
-        this.setLayout(null);
+        this.setLayout(null); 
         
         this.addKeyListener(new KeyListener(){
 
@@ -37,33 +43,50 @@ public class Maze extends JFrame{
 				
 				//Player movement
 				//WASD
-				if(key == KeyEvent.VK_W){
-					p.moveUp();
+				if(/*key == KeyEvent.VK_W ||*/ key == KeyEvent.VK_UP && !down){
+					//p.moveUp();
+					
+					left = false;
+		            right = false;
+		            up = true;    
 				}
 				
-				if(key == KeyEvent.VK_A){
-					p.moveLeft();
+				if(/*key == KeyEvent.VK_A ||*/ key == KeyEvent.VK_LEFT && !right){
+					//p.moveLeft();
+					
+					up = false;
+		            down = false;
+		            left = true;
 				}
-				if(key == KeyEvent.VK_S){
-					p.moveDown();
+				if(/*key == KeyEvent.VK_S ||*/ key == KeyEvent.VK_DOWN && !up){
+					//p.moveDown();
+					
+					left = false;
+		            right = false;
+		            down = true;
 				}
-				if(key == KeyEvent.VK_D){
-					p.moveRight();
+				if(/*key == KeyEvent.VK_D ||*/ key == KeyEvent.VK_RIGHT && !left){
+					//p.moveRight();
+					
+					up = false;
+			        down = false;
+			        right = true;
 				}
+				
 				
 				//Direction pad
-				if (key == KeyEvent.VK_UP) {
-					p.moveUp();
-				}
-				if(key == KeyEvent.VK_LEFT){
-					p.moveLeft();
-				}
-				if(key == KeyEvent.VK_DOWN){
-					p.moveDown();
-				}
-				if(key == KeyEvent.VK_RIGHT){
-					p.moveRight();
-				}
+//				if (key == KeyEvent.VK_UP) {
+//					p.moveUp();
+//				}
+//				if(key == KeyEvent.VK_LEFT){
+//					p.moveLeft();
+//				}
+//				if(key == KeyEvent.VK_DOWN){
+//					p.moveDown();
+//				}
+//				if(key == KeyEvent.VK_RIGHT){
+//					p.moveRight();
+//				}
 				
 				if(p.x == columns-1 && p.y == endLevelLoc){
 					JOptionPane.showMessageDialog(null, "Congratulations, you've beaten the level!", "End Game", JOptionPane.INFORMATION_MESSAGE);
@@ -99,6 +122,8 @@ public class Maze extends JFrame{
     	p = new Player();
     	p.setVisible(true);
     	this.add(p);
+    	
+    	start();
     	
         //Color map
         for(int y = 0; y < columns; y++){
@@ -162,4 +187,53 @@ public class Maze extends JFrame{
             System.out.println("Unable to load existing map(if exists), creating new map.");
         }
     }
+    
+    public void start() {
+    	running = true;
+    	thread = new Thread(this);
+    	thread.start();
+    	
+    }
+    
+    public void stop() {
+    	running = false;
+    }
+    
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		while(running) {
+			tick();
+			repaint();
+		}
+		
+	}
+	public void tick() {
+		ticks++;
+		if (ticks > 250000) {
+			if (right) p.moveRight(); {
+				if (map[p.x+1][p.y] == 0 || map[p.x+1][p.y] == -1) {
+					right=false;
+				} 
+			}
+			if (left) p.moveLeft();{
+				if (p.x == 0) {
+					left = false;
+				} else if (map[p.x-1][p.y] == 0 || map[p.x-1][p.y] == -1) {
+					left=false;
+				} 
+			}	
+			if (up) p.moveUp(); {
+				if (map[p.x][p.y-1] == 0) {
+					up=false;
+				} 
+			}
+			if (down) p.moveDown(); {
+				if (map[p.x][p.y+1] == 0) {
+					down=false;
+				} 
+			}
+			ticks = 0;
+		}
+	}
 }
