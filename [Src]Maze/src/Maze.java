@@ -23,8 +23,8 @@ public class Maze extends JFrame implements Runnable{
     public boolean right = false, left= false, up = false, down = false;
     public int ticks;
     public Thread thread;
-    
     public static Tile tiles[][] = new Tile[columns][rows];
+    public static int returnMap[][] = new int[columns][rows];
     
     public Maze(String str){
         
@@ -126,7 +126,7 @@ public class Maze extends JFrame implements Runnable{
             }
         }
         this.setVisible(true);
-        //this.add(tiles);
+        returnMap = map;
         
     }
     
@@ -199,6 +199,11 @@ public class Maze extends JFrame implements Runnable{
 		}
 		if (!thereIs1) {
 			stop();
+			map = returnMap;
+			left = false; 
+			right = false; 
+			up = false;
+			down = false;
 			JOptionPane.showMessageDialog(null, "Congratulations, you've beaten the level!", "End Game", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 			new MainMenu();

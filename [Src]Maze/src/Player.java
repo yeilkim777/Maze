@@ -11,7 +11,7 @@ public class Player extends JPanel{
 
 	
     public Player() {
-    	this.setBackground(Color.getHSBColor(0.3f, 0.3f, 1));
+    	this.setBackground(Color.RED);
     	this.setSize(Maze.panelSize, Maze.panelSize);
     }
 
