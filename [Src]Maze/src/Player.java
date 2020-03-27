@@ -17,7 +17,6 @@ public class Player extends JPanel{
 
     public void moveLeft() {
     	if(x > 0 && Maze.map[x-1][y] >= 1){
-	    	// return back if my code doesn't work
     		this.setLocation(this.getX()-Maze.panelSize, this.getY());
     		Maze.tiles[x][y].setBackground(Color.GREEN);
     		Maze.map[x][y] = 2;
@@ -27,7 +26,6 @@ public class Player extends JPanel{
 
     public void moveRight() {
     	if(x < Maze.columns-1 && Maze.map[x+1][y] >= 1){
-    		// return back if my code doesn't work
     		this.setLocation(this.getX()+Maze.panelSize, this.getY());
     		Maze.tiles[x][y].setBackground(Color.GREEN);
     		Maze.map[x][y] = 2;
@@ -37,7 +35,6 @@ public class Player extends JPanel{
 
     public void moveUp() {
     	if(y > 0 && Maze.map[x][y-1] >= 1){
-    		// return back if my code doesn't work
     		this.setLocation(this.getX(), this.getY()-Maze.panelSize);
     		Maze.tiles[x][y].setBackground(Color.GREEN);
     		Maze.map[x][y] = 2;
@@ -47,7 +44,6 @@ public class Player extends JPanel{
 
     public void moveDown() {
     	if(y < Maze.rows-1 && Maze.map[x][y+1] >= 1){
-    		// return back if my code doesn't work
     		this.setLocation(this.getX(), this.getY()+Maze.panelSize);
     		Maze.tiles[x][y].setBackground(Color.GREEN);
     		Maze.map[x][y] = 2;

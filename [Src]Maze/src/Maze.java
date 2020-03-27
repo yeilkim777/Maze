@@ -68,12 +68,6 @@ public class Maze extends JFrame implements Runnable{
 						right = true;
 				}
 				
-				
-//				if(p.x == columns-1 && p.y == endLevelLoc){
-//					JOptionPane.showMessageDialog(null, "Congratulations, you've beaten the level!", "End Game", JOptionPane.INFORMATION_MESSAGE);
-//					dispose();
-//					new MainMenu();
-//				}
 			}
 
 			@Override
@@ -192,16 +186,37 @@ public class Maze extends JFrame implements Runnable{
 		}
 		
 	}
+	
+	public void checkMap() {
+		boolean thereIs1 = false;
+		for(int y = 0; y < columns; y++){
+			for(int x = 0; x < rows; x++){
+				if (map[x][y] == 1) {
+					thereIs1 = true;
+					break;
+				}
+			}
+		}
+		if (!thereIs1) {
+			stop();
+			JOptionPane.showMessageDialog(null, "Congratulations, you've beaten the level!", "End Game", JOptionPane.INFORMATION_MESSAGE);
+			dispose();
+			new MainMenu();
+		}
+	}
+	
 	public void tick() {
 		ticks++;
+		map[p.x][p.y] = 2;
 		if (ticks > 250000) {
 			if (right) p.moveRight(); {
 				//System.out.println(endLevelLoc);
 				if (p.x == columns-1 && p.y == endLevelLoc) {
-					right = true;
+					right = false;
 					//possibly redundant after implementing maze coloring
 				} else if (map[p.x+1][p.y] == 0) {
 					right = false;
+					//checkMap();
 				} 
 			}
 			if (left) p.moveLeft();{
@@ -209,32 +224,23 @@ public class Maze extends JFrame implements Runnable{
 					left = false;
 				} else if (map[p.x-1][p.y] == 0 || map[p.x-1][p.y] == -1) {
 					left = false;
+					//checkMap();
 				} 
 			}	
 			if (up) p.moveUp(); {
 				if (map[p.x][p.y-1] == 0) {
 					up = false;
+					//checkMap();
 				} 
 			}
 			if (down) p.moveDown(); {
 				if (map[p.x][p.y+1] == 0) {
 					down = false;
+					//checkMap();
 				} 
 			}
-			if(p.x == columns-1 && p.y == endLevelLoc){
-				stop();
-				JOptionPane.showMessageDialog(null, "Congratulations, you've beaten the level!", "End Game", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-				new MainMenu();
-			}
+			checkMap();
 			ticks = 0;
 		}
-//		for(int y = 0; y < columns; y++){
-//            for(int x = 0; x < rows; x++){
-//            	if (map[x][y] != 2) {
-//            		
-//            	}
-//            }
-//		}
 	}
 }
