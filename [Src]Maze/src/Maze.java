@@ -20,9 +20,11 @@ public class Maze extends JFrame implements Runnable{
     Player p;
     
     private boolean running;
-    public boolean right = false, left= false, up = false, down = false, actionDone = false;
+    public boolean right = false, left= false, up = false, down = false;
     public int ticks;
     public Thread thread;
+    
+    public static Tile tiles[][] = new Tile[columns][rows];
     
     public Maze(String str){
         
@@ -41,7 +43,6 @@ public class Maze extends JFrame implements Runnable{
 				revalidate();
 				repaint();
 				
-				System.out.println("Does it loop here");
 				//Player movement
 				if((key == KeyEvent.VK_W || key == KeyEvent.VK_UP) && !down && !left && !right){
 						left = false;
@@ -126,10 +127,13 @@ public class Maze extends JFrame implements Runnable{
                 }
                 
                 tile.setVisible(true);
+                tiles[x][y] = tile;
                 this.add(tile);
             }
         }
         this.setVisible(true);
+        //this.add(tiles);
+        
     }
     
     public static void main(String args[]){
@@ -225,5 +229,12 @@ public class Maze extends JFrame implements Runnable{
 			}
 			ticks = 0;
 		}
+//		for(int y = 0; y < columns; y++){
+//            for(int x = 0; x < rows; x++){
+//            	if (map[x][y] != 2) {
+//            		
+//            	}
+//            }
+//		}
 	}
 }
