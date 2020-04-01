@@ -107,6 +107,7 @@ public class Maze extends JFrame implements Runnable{
     	
     	start();
     	
+    	
         //Color map
         for(int y = 0; y < columns; y++){
             for(int x = 0; x < rows; x++){
@@ -114,7 +115,7 @@ public class Maze extends JFrame implements Runnable{
                 tile.setSize(panelSize, panelSize);
                 tile.setLocation((x*panelSize)+23, (y*panelSize)+25);
                 if(map[x][y] == 0){
-                    tile.setBackground(Color.GRAY);
+                    tile.setBackground(Color.DARK_GRAY);
                 }else{
                     tile.setBackground(Color.WHITE);
                     tile.setWall(false);
@@ -125,7 +126,16 @@ public class Maze extends JFrame implements Runnable{
                     if(x == columns-1){
                     	endLevelLoc = y;
                     }
+//                    if (map[x][y] == 3) {
+//                    	p = new Player();
+////                    	p.x = x;
+////                    	p.y = y;
+//                    	p.setVisible(true);
+//                    	this.add(p);
+//                    }
                 }
+                
+                //start();
                 
                 tile.setVisible(true);
                 tiles[x][y] = tile;
