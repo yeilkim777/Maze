@@ -12,9 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class MazeMapMaker extends JFrame{
-	static int rows = 20;
-    static int columns = 20;
-    int panelSize = 25;
+	static int rows = 13;
+    static int columns = 13;
+    int panelSize = 35;
     static int map[][] = new int[columns][rows];
     ArrayList<String> mapList = new ArrayList<String>();
     int level = 0;

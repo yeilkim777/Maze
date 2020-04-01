@@ -12,9 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Maze extends JFrame implements Runnable{
-    public static int rows = 20;
-    public static int columns = 20;
-    public static int panelSize = 35;
+    public static int rows = 13; //20
+    public static int columns = 13; //20
+    public static int panelSize = 50; //40
     public static int map[][] = new int[columns][rows];
     public static int endLevelLoc;
     Player p;
@@ -28,11 +28,18 @@ public class Maze extends JFrame implements Runnable{
     
     public Maze(String str){
         
+    	
     	loadMap(str);
-        this.setResizable(false);
+        this.setResizable(true);
         this.setSize((columns*panelSize)+50, (rows*panelSize)+70);
-        this.setTitle("Maze");
+        this.setTitle("Maze " + str );
         this.setLayout(null); 
+        
+        this.addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent e) {
+                new MainMenu();
+            }
+        });
         
         this.addKeyListener(new KeyListener(){
 
@@ -86,8 +93,8 @@ public class Maze extends JFrame implements Runnable{
         
         this.addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent e) {
-                //System.out.println((columns*panelSize)+50+"-"+((rows*panelSize)+70));
-                System.exit(0);
+                stop();
+            	new MainMenu();
             }
         });
         
