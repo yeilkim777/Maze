@@ -29,7 +29,7 @@ public class MainMenu {
     int menuY = 460; //Button/item location on display
     int WIDTH = 490;
     int HEIGHT = 530;
-    
+    int index;
             
 	public MainMenu() {
     	//Load map list
@@ -51,7 +51,8 @@ public class MainMenu {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				new Maze(lvlList.getSelectedItem().toString());
+				index = lvlList.getSelectedIndex();
+				new Maze(lvlList.getSelectedItem().toString(), index);
 				Menu.setVisible(false);
 			}
         	
@@ -101,7 +102,7 @@ public class MainMenu {
     	for(int i = 0; i < 99; i++){
     		File map = new File("./Level "+i+".map");
     		if(map.exists()){
-    			System.out.println("Level "+i+" exists");
+    			//System.out.println("Level "+i+" exists");
     			mapList.add("Level "+i+".map");
     			levelsExistAlready = true;
     		}

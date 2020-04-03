@@ -1,15 +1,17 @@
-
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+
 
 public class Maze extends JFrame implements Runnable{
     public static int rows = 13; //20
@@ -25,10 +27,13 @@ public class Maze extends JFrame implements Runnable{
     public Thread thread;
     public static Tile tiles[][] = new Tile[columns][rows];
     public static int returnMap[][] = new int[columns][rows];
+    ArrayList<String> mapList = new ArrayList<String>();
+    JComboBox<String> lvlList;
+    public int level;
     
-    public Maze(String str){
+    public Maze(String str, int counter){
         
-    	
+    	level = counter;
     	loadMap(str);
         this.setResizable(true);
         this.setSize((columns*panelSize)+50, (rows*panelSize)+70);
@@ -37,6 +42,8 @@ public class Maze extends JFrame implements Runnable{
         
         this.addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent e) {
+            	stop();
+            	dispose();
                 new MainMenu();
             }
         });
@@ -90,14 +97,7 @@ public class Maze extends JFrame implements Runnable{
 			}
         	
         });
-        
-        this.addWindowListener(new WindowAdapter(){
-            public void windowClosing(WindowEvent e) {
-                stop();
-            	new MainMenu();
-            }
-        });
-        
+             
         this.setLocationRelativeTo(null);
         
         //Create player
@@ -148,7 +148,7 @@ public class Maze extends JFrame implements Runnable{
     }
     
     public static void main(String args[]){
-    	new MainMenu();
+    	 new MainMenu();
     }
     
     public void loadMap(String str){
@@ -223,7 +223,7 @@ public class Maze extends JFrame implements Runnable{
 			down = false;
 			JOptionPane.showMessageDialog(null, "Congratulations, you've beaten the level!", "End Game", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
-			new MainMenu();
+			nextMaze();
 		}
 	}
 	
@@ -264,5 +264,31 @@ public class Maze extends JFrame implements Runnable{
 			checkMap();
 			ticks = 0;
 		}
+	}
+	static boolean levelsExistAlready = false;
+	public void getMapList(){
+    	for(int i = 0; i < 99; i++){
+    		File map = new File("./Level "+i+".map");
+    		if(map.exists()){
+    			//System.out.println("Level "+i+" exists");
+    			mapList.add("Level "+i+".map");
+    			levelsExistAlready = true;
+    		}
+    	}
+    }
+	public void nextMaze() {
+		getMapList();
+		String progress = "";
+		if (level == mapList.size()-1) {
+			stop();
+			dispose();
+			new MainMenu();
+		}
+		else if(level < mapList.size()-1) {
+			level = level + 1;
+			progress = mapList.get(level);
+			new Maze(progress, level);
+		}
+		
 	}
 }
