@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class Maze extends JFrame implements Runnable{
     public static int rows = 13; //20
     public static int columns = 13; //20
-    public static int panelSize = 50; //40
+    public static int panelSize = 55; //40
     public static int map[][] = new int[columns][rows];
     public static int endLevelLoc;
     Player p;
