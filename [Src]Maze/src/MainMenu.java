@@ -20,7 +20,8 @@ public class MainMenu {
     JButton Start = new JButton("Play");
     JButton Exit = new JButton("Exit");
     JButton MapMaker = new JButton("Map Maker");
-    ImageIcon picture = new ImageIcon("res/Images/MazePicture.png");
+    JButton Instructions = new JButton("Instructions");
+    ImageIcon picture = new ImageIcon("res/Images/BluePaintRoller1.jpg"); //MazePicture.png  // 1,3,4 is jpg, 2 is png
     JLabel imageLabel = new JLabel(picture);
     ArrayList<String> mapList = new ArrayList<String>();
     JComboBox<String> lvlList;
@@ -59,15 +60,30 @@ public class MainMenu {
         });	
         
         //Map Maker Button Variables
-        MapMaker.setSize(menuWidth,menuHeight);
-        MapMaker.setLocation(120, menuY);
-        Menu.add(MapMaker);
-        MapMaker.addActionListener(new ActionListener(){
+//        MapMaker.setSize(menuWidth,menuHeight);
+//        MapMaker.setLocation(120, menuY);
+//        Menu.add(MapMaker);
+//        MapMaker.addActionListener(new ActionListener(){
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				new MazeMapMaker();
+//				Menu.setVisible(false);
+//			}
+//        	
+//        });
+        
+        //Instruction Button Variables
+        Instructions.setSize(menuWidth,menuHeight);
+        Instructions.setLocation(120, menuY);
+        Menu.add(Instructions);
+        Instructions.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new MazeMapMaker();
-				Menu.setVisible(false);
+				//JFrame instruction = new JFrame("Instruction");
+				new Instructions();
+		        //Menu.setVisible(false);
 			}
         	
         });
@@ -90,7 +106,7 @@ public class MainMenu {
         });
         
         //Display Picture
-        imageLabel.setBounds((WIDTH-412)/2, 25, 412, 412);
+        imageLabel.setBounds((WIDTH-420)/2, 25, 420, 420); // 412
         imageLabel.setVisible(true);
         Menu.add(imageLabel);
         Menu.setVisible(true);
