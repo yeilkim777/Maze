@@ -28,30 +28,16 @@ public class Instructions extends JFrame {
 		Runnable r = () -> {
 			String intro = "Welcome to (come up with title)!\r\n" + 
 					"\r\n" + 
-					"To win the game, traverse and color through the mazes. You can only move one direction at a time, so plan your moves well!\r\n" + 
-					"\n" + 
+					"To win the game, traverse and color through the mazes." +"\n"
+					+ "You can only move one direction at a time, so plan your moves well!\r\n\n" + 
+					"Move using the direction pad or WASD pad." + 
+					//"\n\n" + "if the maze is difficult, press enter to skip the maze." +
+					"\n\n" + 
 					"Have Fun!";
 			
-					JOptionPane.showMessageDialog(null, String.format(intro, 175, 175));
+					JOptionPane.showMessageDialog(null, String.format(intro, 200, 200));
 		};
 		
 		SwingUtilities.invokeLater(r);
-		
-//		text = new JLabel();
-//		String intro = "<p>Welcome to (come up with title)!</p>\\r\\n\" + \r\n" + 
-//				"\"\\r\\n\" + \r\n" + 
-//				"\"<p>To win the game, traverse and color through the mazes. You can only move one direction at a time, so plan your moves well!</p>\\r\\n\" + \r\n" + 
-//				"\"\\r\\n\" + \r\n" + 
-//				"\"<p>Have Fun!</p";
-//		text.setText(intro);
-//		JPanel p = new JPanel();
-//		p.add(text);
-//		this.add(p);
-//		this.setResizable(false);
-//		this.setSize(500, 300);
-//		this.setLocationRelativeTo(null);
-//		this.setTitle("Instructions");
-//		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		this.setVisible(true);
 	}
 }

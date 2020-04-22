@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -81,6 +82,10 @@ public class Maze extends JFrame implements Runnable{
 						down = false;
 						right = true;
 				}
+//				if (key == KeyEvent.VK_ENTER) {
+//					dispose();
+//					nextMaze();
+//				}
 				
 			}
 
@@ -118,6 +123,7 @@ public class Maze extends JFrame implements Runnable{
                     tile.setBackground(Color.DARK_GRAY);
                 }else{
                     tile.setBackground(Color.WHITE);
+                    tile.setBorder(BorderFactory.createLineBorder(Color.black));
                     tile.setWall(false);
                     if(x == 0){
                     	p.setLocation((x*panelSize)+23, (y*panelSize)+25);

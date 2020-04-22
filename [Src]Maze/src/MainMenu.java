@@ -20,8 +20,8 @@ public class MainMenu {
     JButton Start = new JButton("Play");
     JButton Exit = new JButton("Exit");
     JButton MapMaker = new JButton("Map Maker");
-    JButton Instructions = new JButton("Instructions");
-    ImageIcon picture = new ImageIcon("res/Images/BluePaintRoller1.jpg"); //MazePicture.png  // 1,3,4 is jpg, 2 is png
+    JButton Instructions = new JButton("Rules");
+    ImageIcon picture = new ImageIcon("res/Images/BluePaintRoller2.png"); //MazePicture.png  // 1,3,4 is jpg, 2 is png
     JLabel imageLabel = new JLabel(picture);
     ArrayList<String> mapList = new ArrayList<String>();
     JComboBox<String> lvlList;
@@ -72,7 +72,7 @@ public class MainMenu {
 //			}
 //        	
 //        });
-        
+         
         //Instruction Button Variables
         Instructions.setSize(menuWidth,menuHeight);
         Instructions.setLocation(120, menuY);
