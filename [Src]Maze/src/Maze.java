@@ -82,10 +82,11 @@ public class Maze extends JFrame implements Runnable{
 						down = false;
 						right = true;
 				}
-//				if (key == KeyEvent.VK_ENTER) {
-//					dispose();
-//					nextMaze();
-//				}
+				if (key == KeyEvent.VK_N) {
+					dispose();
+					stop();
+					nextMaze();
+				} 
 				
 			}
 
