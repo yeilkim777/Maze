@@ -1,16 +1,24 @@
 
+import java.applet.Applet;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import java.applet.*;
+import java.io.File;
+import java.net.*;
 
 /**
  *
@@ -18,7 +26,7 @@ import javax.swing.JLabel;
  */
 public class MainMenu {
 
-    JFrame Menu = new JFrame("Maze Day Maze");
+    JFrame Menu = new JFrame("Maze Day Color Maze");
     JButton Start = new JButton("Play");
     JButton Exit = new JButton("Exit");
     JButton MapMaker = new JButton("Map Maker");
@@ -33,18 +41,11 @@ public class MainMenu {
     int WIDTH = 490;
     int HEIGHT = 530;
     int index;
-    
-    private String name;
-    private com.aun.speech.freetts.MainMenu voice;
             
 	public MainMenu() {
     	//Load map list
     	getMapList();
-    	lvlList = new JComboBox<String>(mapList.toArray(new String[mapList.size()]));
-    	
-        
-        
-        
+    	lvlList = new JComboBox<String>(mapList.toArray(new String[mapList.size()]));    
     	
         //Menu Variables
         Menu.setResizable(false);
@@ -84,6 +85,19 @@ public class MainMenu {
 				}
 				if (key == KeyEvent.VK_X) {
 					Menu.dispose();
+				}
+				if (key == KeyEvent.VK_I) {
+					
+					File rule = new File("res/Audio/Rules.wav");
+					try {
+			    		Clip clip = AudioSystem.getClip();
+			    		clip.open(AudioSystem.getAudioInputStream(rule));
+			    		clip.start();
+			    		Thread.sleep(clip.getMicrosecondLength()/1000);
+			    	} 
+			    	catch (Exception l) {
+			    		
+			    	}
 				}
 			}
 
@@ -154,9 +168,35 @@ public class MainMenu {
         Menu.add(imageLabel);
         Menu.setVisible(true);
         
+        new java.util.Timer().schedule(
+        		new java.util.TimerTask() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+				    	File Intro = new File("res/Audio/Introduction.wav");
+				    	try {
+				    		Clip clip = AudioSystem.getClip();
+				    		clip.open(AudioSystem.getAudioInputStream(Intro));
+				    		clip.start();
+				    		Thread.sleep(clip.getMicrosecondLength()/1000);
+				    	} 
+				    	catch (Exception e) {
+				    		
+				    	}
+					}
+        			
+        		},
+        		1
+        );
+        
+        
+        
     } 
 
-    static boolean levelsExistAlready = false;
+
+
+	static boolean levelsExistAlready = false;
 
     public void getMapList(){
     	for(int i = 0; i < 99; i++){

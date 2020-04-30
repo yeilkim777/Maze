@@ -26,11 +26,12 @@ public class Instructions extends JFrame {
 	public Instructions () {
 		
 		Runnable r = () -> {
-			String intro = "Welcome to (come up with title)!\r\n" + 
+			String intro = "Welcome to the Maze Day Color Maze!\r\n" + 
 					"\r\n" + 
 					"To win the game, traverse and color through the mazes." +"\n"
-					+ "You can only move one direction at a time, so plan your moves well!\r\n\n" + 
-					"Move using the direction pad or WASD pad." + 
+					+ "You can only move one direction at a time, so plan your moves wisely!\r\n\n" + 
+					"Move using the direction pad or WASD pad." + "\n" +
+					"If the maze is too difficult, press the N key to move to the next level." +
 					//"\n\n" + "if the maze is difficult, press enter to skip the maze." +
 					"\n\n" + 
 					"Have Fun!";

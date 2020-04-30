@@ -11,7 +11,7 @@ public class Player extends JPanel{
 	Color BluePaint = Color.decode("#00ccff");
 	
     public Player() {
-    	this.setBackground(Color.decode("#A52A2A")); // Blue or Yellow
+    	this.setBackground(Color.decode("#FFBF00")); // Blue or Yellow
     	this.setBorder(BorderFactory.createLineBorder(Color.white));
     	this.setSize(Maze.panelSize, Maze.panelSize);
     }

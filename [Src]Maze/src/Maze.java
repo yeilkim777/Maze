@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -87,6 +89,11 @@ public class Maze extends JFrame implements Runnable{
 					stop();
 					nextMaze();
 				} 
+				if (key == KeyEvent.VK_X) {
+					dispose();
+					stop();
+					new MainMenu();
+				}
 				
 			}
 
@@ -133,16 +140,7 @@ public class Maze extends JFrame implements Runnable{
                     if(x == columns-1){
                     	endLevelLoc = y;
                     }
-//                    if (map[x][y] == 3) {
-//                    	p = new Player();
-////                    	p.x = x;
-////                    	p.y = y;
-//                    	p.setVisible(true);
-//                    	this.add(p);
-//                    }
                 }
-                
-                //start();
                 
                 tile.setVisible(true);
                 tiles[x][y] = tile;
@@ -228,7 +226,17 @@ public class Maze extends JFrame implements Runnable{
 			right = false; 
 			up = false;
 			down = false;
-			JOptionPane.showMessageDialog(null, "Congratulations, you've beaten the level!", "End Game", JOptionPane.INFORMATION_MESSAGE);
+			File ding = new File("res/Audio/Ding.wav");
+	    	try {
+	    		Clip clip = AudioSystem.getClip();
+	    		clip.open(AudioSystem.getAudioInputStream(ding));
+	    		clip.start();
+	    		Thread.sleep(clip.getMicrosecondLength()/1000);
+	    	} 
+	    	catch (Exception e) {
+	    		
+	    	}
+			//JOptionPane.showMessageDialog(null, "Congratulations, you've beaten the level!", "Maze Colored", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 			nextMaze();
 		}
