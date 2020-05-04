@@ -19,3 +19,5 @@ We attempted to implement controller support so that the rumble functionality co
 Anthony Okwudi
 
 Brendan Sheehan
+
+Philip Kim
